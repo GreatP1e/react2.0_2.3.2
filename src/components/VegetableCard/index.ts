@@ -1,0 +1,1 @@
+export { VegetableCard } from "./VegetableCard.tsx";

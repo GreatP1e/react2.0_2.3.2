@@ -1,0 +1,1 @@
+export { VegetableCardMini } from "./VegetableCardMini";
