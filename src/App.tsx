@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { AppShell, createTheme, MantineProvider, Title } from "@mantine/core";
+import {
+  AppShell,
+  createTheme,
+  Loader,
+  MantineProvider,
+  Title,
+} from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { Header } from "./modules/header";
 import { Popup } from "./modules/popup";
@@ -13,6 +19,7 @@ import style from "./App.module.scss";
 function App() {
   const [opened, { toggle }] = useDisclosure(false);
   const [vegetables, setVegetables] = useState<VegetableData[]>([]);
+  const [loader, setLoader] = useState(true);
 
   useEffect(() => {
     getVegetable()
@@ -23,6 +30,7 @@ function App() {
           inCart: false,
         }));
         setVegetables(vegetablesData);
+        setLoader(false);
       })
       .catch((err) => {
         console.error(err);
@@ -92,12 +100,19 @@ function App() {
           cartVegetables={vegetables.filter((el) => el.inCart)}
           setVegetables={setVegetablesHandler}
         />
-        <AppShell.Main classNames={{ main: style.main }}>
-          <Title order={1} mx={0} my={60}>
-            Catalog
-          </Title>
-          <List vegetables={vegetables} setVegetables={setVegetablesHandler} />
-        </AppShell.Main>
+        {loader ? (
+          <Loader color="myGreen.5" />
+        ) : (
+          <AppShell.Main classNames={{ main: style.main }}>
+            <Title order={1} mx={0} my={60}>
+              Catalog
+            </Title>
+            <List
+              vegetables={vegetables}
+              setVegetables={setVegetablesHandler}
+            />
+          </AppShell.Main>
+        )}
       </AppShell>
     </MantineProvider>
   );
