@@ -1,20 +1,14 @@
 import { useEffect, useState } from "react";
-import {
-  AppShell,
-  createTheme,
-  Loader,
-  MantineProvider,
-  Title,
-} from "@mantine/core";
+import { AppShell, Loader, MantineProvider, Title } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { Header } from "./modules/header";
 import { Popup } from "./modules/popup";
 import { List } from "./modules/list";
-import { myGreen, myGrey } from "./constants/constTheme";
 import { getVegetable } from "./api/getVegetable";
 import { TypesChange, VegetableData } from "./types";
 import "@mantine/core/styles.css";
 import style from "./App.module.scss";
+import { theme } from "./theme";
 
 function App() {
   const [opened, { toggle }] = useDisclosure(false);
@@ -70,24 +64,6 @@ function App() {
         });
     }
   };
-  const theme = createTheme({
-    headings: {
-      sizes: {
-        h1: {
-          fontWeight: "600",
-          fontSize: "32px",
-        },
-      },
-    },
-    colors: {
-      myGreen,
-      myGrey,
-    },
-    radius: {
-      md: "8px",
-      xl: "16px",
-    },
-  });
   return (
     <MantineProvider theme={theme}>
       <AppShell header={{ height: 60 }}>

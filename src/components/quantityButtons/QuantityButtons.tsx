@@ -7,6 +7,7 @@ export const QuantityButtons = ({ quantity, setVegetables, id }: Props) => {
   return (
     <Group>
       <Button
+        data-testid="quantity-decrement-button"
         p={0}
         w={30}
         h={30}
@@ -15,8 +16,9 @@ export const QuantityButtons = ({ quantity, setVegetables, id }: Props) => {
         onClick={() => setVegetables(TypesChange.QUANTITY_DECREMENT, id)}>
         <BackgroundImage src={minus} w={12} h={2} />
       </Button>
-      <Text>{quantity}</Text>
+      <Text data-testid="quantity-text">{quantity}</Text>
       <Button
+        data-testid="quantity-increment-button"
         p={0}
         w={30}
         h={30}
