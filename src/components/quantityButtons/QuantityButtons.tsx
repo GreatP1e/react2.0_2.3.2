@@ -1,9 +1,14 @@
 import { BackgroundImage, Button, Group, Text } from "@mantine/core";
 import minus from "../../assets/img/minus.svg";
 import plus from "../../assets/img/plus.svg";
-import { TypesChange } from "../../types";
+import {
+  quantityDecrement,
+  quantityIncrement,
+  useAppDispatch,
+} from "../../reducer/reducer";
 
-export const QuantityButtons = ({ quantity, setVegetables, id }: Props) => {
+export const QuantityButtons = ({ quantity, id }: Props) => {
+  const dispatch = useAppDispatch();
   return (
     <Group>
       <Button
@@ -13,7 +18,7 @@ export const QuantityButtons = ({ quantity, setVegetables, id }: Props) => {
         h={30}
         radius="md"
         color="myGrey.3"
-        onClick={() => setVegetables(TypesChange.QUANTITY_DECREMENT, id)}>
+        onClick={() => dispatch(quantityDecrement(id))}>
         <BackgroundImage src={minus} w={12} h={2} />
       </Button>
       <Text data-testid="quantity-text">{quantity}</Text>
@@ -24,7 +29,7 @@ export const QuantityButtons = ({ quantity, setVegetables, id }: Props) => {
         h={30}
         radius="md"
         color="myGrey.3"
-        onClick={() => setVegetables(TypesChange.QUANTITY_INCREMENT, id)}>
+        onClick={() => dispatch(quantityIncrement(id))}>
         <BackgroundImage src={plus} w={12} h={12} />
       </Button>
     </Group>
@@ -34,5 +39,4 @@ export const QuantityButtons = ({ quantity, setVegetables, id }: Props) => {
 interface Props {
   quantity: number;
   id: number;
-  setVegetables: (propChange: TypesChange, id: number) => void;
 }

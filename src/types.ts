@@ -10,9 +10,3 @@ export interface VegetableData extends Vegetable {
   quantity: number;
   inCart: boolean;
 }
-
-export enum TypesChange {
-  QUANTITY_INCREMENT = "quantityIncrement",
-  QUANTITY_DECREMENT = "quantityDecrement",
-  IN_CART = "inCart",
-}

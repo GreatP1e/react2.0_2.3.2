@@ -1,6 +1,6 @@
 import { Flex, Group, Image, Text } from "@mantine/core";
 import { QuantityButtons } from "../../components/quantityButtons";
-import { VegetableData, TypesChange } from "../../types";
+import { VegetableData } from "../../types";
 import style from "./vegetableCardMini.module.scss";
 
 export const VegetableCardMini = ({
@@ -9,8 +9,7 @@ export const VegetableCardMini = ({
   image,
   id,
   quantity,
-  setVegetables,
-}: Props) => {
+}: VegetableData) => {
   const [vegetablesName, weight] = name.split(" - ");
   return (
     <Flex wrap="nowrap" mb={20} gap={10} w="100%" className={style.card}>
@@ -28,17 +27,9 @@ export const VegetableCardMini = ({
           <Text size="18px" fw={600}>
             ${price}
           </Text>
-          <QuantityButtons
-            quantity={quantity}
-            setVegetables={setVegetables}
-            id={id}
-          />
+          <QuantityButtons quantity={quantity} id={id} />
         </Group>
       </Flex>
     </Flex>
   );
 };
-
-interface Props extends VegetableData {
-  setVegetables: (propChange: TypesChange, id: number) => void;
-}

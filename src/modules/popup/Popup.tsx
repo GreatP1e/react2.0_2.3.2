@@ -1,10 +1,10 @@
 import { Center, Dialog, Image, SimpleGrid, Text, Group } from "@mantine/core";
 import { VegetableCardMini } from "../../components/VegetableCardMini";
 import cartEmpty from "../../assets/img/cart_empty.svg";
-import { VegetableData, TypesChange } from "../../types";
+import { VegetableData } from "../../types";
 import style from "./popup.module.scss";
 
-export const Popup = ({ opened, cartVegetables, setVegetables }: Props) => {
+export const Popup = ({ opened, cartVegetables }: Props) => {
   return (
     <Dialog
       opened={opened}
@@ -14,13 +14,7 @@ export const Popup = ({ opened, cartVegetables, setVegetables }: Props) => {
       {cartVegetables.length > 0 ? (
         <SimpleGrid cols={1}>
           {cartVegetables.map((el) => {
-            return (
-              <VegetableCardMini
-                key={el.id}
-                {...el}
-                setVegetables={setVegetables}
-              />
-            );
+            return <VegetableCardMini key={el.id} {...el} />;
           })}
           <Group justify="space-between" className={style.total}>
             <Text size="18px" fw={600}>
@@ -54,5 +48,4 @@ export const Popup = ({ opened, cartVegetables, setVegetables }: Props) => {
 interface Props {
   opened: boolean;
   cartVegetables: VegetableData[];
-  setVegetables: (propChange: TypesChange, id: number) => void;
 }

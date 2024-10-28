@@ -2,7 +2,8 @@ import { Button, Card, Group, Image, Text } from "@mantine/core";
 import { Cart } from "../../shared/image";
 import { QuantityButtons } from "../../components/quantityButtons";
 import style from "./vegetableCard.module.scss";
-import { VegetableData, TypesChange } from "../../types";
+import { VegetableData } from "../../types";
+import { toggleCart, useAppDispatch } from "../../reducer/reducer";
 
 export const VegetableCard = ({
   name,
@@ -10,9 +11,9 @@ export const VegetableCard = ({
   image,
   id,
   quantity,
-  setVegetables,
-}: Props) => {
+}: VegetableData) => {
   const [vegetablesName, weight] = name.split(" - ");
+  const dispatch = useAppDispatch();
   return (
     <Card>
       <Image w="100%" src={image} alt={vegetablesName} />
@@ -25,11 +26,7 @@ export const VegetableCard = ({
             {weight}
           </Text>
         </Group>
-        <QuantityButtons
-          quantity={quantity}
-          setVegetables={setVegetables}
-          id={id}
-        />
+        <QuantityButtons quantity={quantity} id={id} />
       </Group>
       <Group justify="space-between" mt={20}>
         <Text size="18px" fw={600}>
@@ -40,7 +37,7 @@ export const VegetableCard = ({
           w={204}
           h={44}
           color="myGreen.1"
-          onClick={() => setVegetables(TypesChange.IN_CART, id)}>
+          onClick={() => dispatch(toggleCart(id))}>
           <Group justify="space-around" w="100%" h="100%">
             <Text size="16px" fw={600} c="myGreen.7">
               Add to cart
@@ -52,7 +49,3 @@ export const VegetableCard = ({
     </Card>
   );
 };
-
-interface Props extends VegetableData {
-  setVegetables: (propChange: TypesChange, id: number) => void;
-}
